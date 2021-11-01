@@ -19,7 +19,7 @@ const sidebarConfig = [
     checkauth: '0'
   },
   {
-    title: 'Admin',
+    title: 'Profile',
     path: '/dashboard',
     icon: <PeopleIcon />,
     checkauth: '1'
