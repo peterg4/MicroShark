@@ -1,0 +1,70 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/icons-material": "^5.0.5",
+    "@mui/lab": "^5.0.0-alpha.53",
+    "@mui/material": "^5.0.6",
+    "axios": "^0.21.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "formik": "^2.2.9",
+    "helmet": "^4.6.0",
+    "moment": "^2.24.0",
+    "react": "^16.8.6",
+    "react-barcode-reader": "0.0.2",
+    "react-dom": "^17.0.2",
+    "react-flow-renderer": "^9.6.9",
+    "react-helmet-async": "^1.1.2",
+    "react-moment": "^0.9.2",
+    "react-qr-barcode-scanner": "^1.0.6",
+    "react-redux": "^7.0.2",
+    "react-router": "^6.0.0-beta.8",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "3.0.0",
+    "react-webcam": "^6.0.0",
+    "react-webcam-barcode-scanner": "0.0.2-rc2",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "simplebar-react": "^2.3.6",
+    "uuid": "^3.3.2",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@iconify-icons/eva": "^1.1.0",
+    "@iconify/react": "^3.0.1",
+    "jest": "^25.1.0",
+    "redux-mock-store": "^1.5.4"
+  },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
+  }
+}
