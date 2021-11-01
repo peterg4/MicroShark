@@ -16,7 +16,7 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
     textTransform: 'capitalize',
     paddingLeft: theme.spacing(5),
     paddingRight: theme.spacing(2.5),
-    color: theme.palette.text.primary,
+    color: theme.palette.common.white,
     '&:before': {
       top: 0,
       right: 0,

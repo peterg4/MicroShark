@@ -70,8 +70,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <Container maxWidth="sm">
     <FormikProvider value={formik}>
-      <Box sx={{ mb: 3 }}>
-        <Typography variant="h3" sx={{ color: 'text.primary' }}>Sign Up</Typography>
+      <Box sx={{ mt: '40%', mb: 3 }}>
+        <Typography variant="h3" sx={{ color: 'text.dark' }}>Sign Up</Typography>
         <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
           <i className='fas fa-user' /> Sign Into Your Account
         </Typography>
@@ -160,7 +160,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </LoadingButton>
         </Stack>
       </Form>
-      <Typography variant="subtitle" sx={{ color: 'text.primary' }}>
+      <Typography variant="subtitle" sx={{ color: 'text.dark' }}>
         Already have an account? <Link to='/login'>Sign In</Link>
       </Typography>
     </FormikProvider>

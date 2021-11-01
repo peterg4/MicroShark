@@ -63,7 +63,7 @@ export const DashboardSidebar = ({
     >
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-            <Typography variant="h3" sx={{ color: 'text.primary' }}>
+            <Typography variant="h3" sx={{ color: 'common.white' }}>
                MicroShark
             </Typography>
         </Box>
