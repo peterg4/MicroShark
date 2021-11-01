@@ -72,6 +72,7 @@ const Login = ({ login, isAuthenticated }) => {
       <Form onSubmit={handleSubmit}>
       <Stack spacing={3}>
           <TextField
+           variant="filled"
             fullWidth
             autoComplete="username"
             type="email"
@@ -82,6 +83,7 @@ const Login = ({ login, isAuthenticated }) => {
           />
 
           <TextField
+            variant="filled"
             fullWidth
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}

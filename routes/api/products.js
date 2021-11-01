@@ -34,4 +34,19 @@ router.get('/',  async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    console.log(req.body);
+    const obj = {
+        code: req.body.code,
+        hasPlastics: req.body.hasPlastics,
+        prodName: req.body.prodName
+    }
+    let newProd = await Product.findOneAndUpdate(
+        { code: req.body.code },
+        { $set: obj},
+        { new: true, upsert: true }
+    );
+    res.status(201).json(newProd);
+});
+
 module.exports = router;

@@ -80,6 +80,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         <Stack spacing={3}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
+              variant="filled"
               fullWidth
               label="First name"
               {...getFieldProps('firstName')}
@@ -88,6 +89,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             />
 
             <TextField
+             variant="filled"
               fullWidth
               label="Last name"
               {...getFieldProps('lastName')}
@@ -97,6 +99,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </Stack>
 
           <TextField
+            variant="filled"
             fullWidth
             autoComplete="username"
             type="email"
@@ -108,6 +111,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
           <TextField
             fullWidth
+            variant="filled"
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
             label="Password"
@@ -127,6 +131,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
           <TextField
             fullWidth
+            variant="filled"
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
             label="Confirm Password"

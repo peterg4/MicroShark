@@ -3,12 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getCurrentProfile } from '../../actions/profile';
-import { Typography, Button, Box, Grid, Container, Stack, TextField } from '@mui/material';
+import { Typography, Button, Box, Grid, Container, Stack, TextField, MenuItem  } from '@mui/material';
 import axios from 'axios';
 import Page from '../layout/Page';
 import { useFormik, Form, FormikProvider } from 'formik';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import { LoadingButton } from '@mui/lab';
+
+const plastics = [
+  {
+    value: '1',
+    label: 'Yes'
+  },
+  {
+    value: '0',
+    label: 'No'
+  }
+]
 
 const Dashboard = ({
   getCurrentProfile,
@@ -47,7 +58,11 @@ const Dashboard = ({
     },
     onSubmit: async e => {
       console.log(e);
-      //axios post the e
+      axios.post('/api/products', {
+        code: e.code,
+        hasPlastics: e.hasPlastics,
+        prodName: e.prodName
+      })
     }
   });
 
@@ -77,6 +92,7 @@ const Dashboard = ({
               <Stack spacing={3}>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                   <TextField
+                    variant="filled"
                     fullWidth
                     className = "textfcolor"
                     label="Code"
@@ -86,16 +102,24 @@ const Dashboard = ({
                   />
 
                   <TextField
+                    variant="filled"
                     className = "textfcolor"
+                    select
+                    value={plastics}
                     fullWidth
                     label="Has Plastics?"
                     {...getFieldProps('hasPlastics')}
                     error={Boolean(touched.lastName && errors.lastName)}
                     helperText={touched.lastName && errors.lastName}
-                  />
+                  > {plastics.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}</TextField>
                 </Stack>
 
                 <TextField
+                  variant="filled"
                   fullWidth
                   label="Product Name"
                   {...getFieldProps('prodName')}
