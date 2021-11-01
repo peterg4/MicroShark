@@ -8,6 +8,7 @@ import axios from 'axios';
 import Page from '../layout/Page';
 import { useFormik, Form, FormikProvider } from 'formik';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import HistoryIcon from '@mui/icons-material/History';
 import { LoadingButton } from '@mui/lab';
 
 const plastics = [
@@ -79,7 +80,7 @@ const Dashboard = ({
             <i className='fas fa-user' /> Welcome {user && user.firstName}
           </Typography>
       </Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={6}>
         <Grid item xs={12} md={6} lg={6}>
           <FormikProvider value={formik}>
             <Box sx={{ mb: 3 }}>
@@ -141,12 +142,15 @@ const Dashboard = ({
           </FormikProvider>
         </Grid>
           
-        <Grid container spacing={3} item xs={12} md={6} lg={2} style={{ height: "100%" }}>
-          <Grid item xs={12}>
-
-          </Grid>
-          <Grid item xs={12}>
-          </Grid>
+        <Grid item spacing={3} item xs={12} md={6} lg={6} style={{ height: "100%" }}>
+          <FormikProvider value={formik}>
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="h3" sx={{ color: 'text.dark' }}>Scan History</Typography>
+              <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
+                <HistoryIcon /> View Your Scan History!
+              </Typography>
+            </Box>
+          </FormikProvider>
         </Grid>
 
         <Grid item xs={12} md={6} lg={2} style={{ height: "100%" }}>
