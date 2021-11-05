@@ -30,7 +30,7 @@ const AccountStyle = styled('div')(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper
+  backgroundColor: theme.palette.background.acc
 }));
 
 // ----------------------------------------------------------------------
@@ -72,12 +72,12 @@ export const DashboardSidebar = ({
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar sx={{ bgcolor: 'primary.main' }}>{user ? user.firstName[0] : <AccountCircleIcon />}</Avatar>
+            <Avatar sx={{ bgcolor: 'common.white' }}>{user ? user.firstName[0] : <AccountCircleIcon />}</Avatar>
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.dark' }}>
+              <Typography variant="subtitle2" sx={{ color: 'common.white' }}>
               {user ? user.firstName + ' ' + user.lastName : 'Guest'}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.dark' }}>
+              <Typography variant="body2" sx={{ color: 'common.white' }}>
               {user ? user.email : ''}
               </Typography>
             </Box>

@@ -83,15 +83,15 @@ export const AccountPopover = ({
         sx={{ width: 220 }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle1" sx={{ color: 'text.dark' }} noWrap>
+          <Typography variant="subtitle1" sx={{ color: 'common.white' }} noWrap>
           {user ? user.firstName + ' ' + user.lastName : 'Guest'}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.disabled' }} noWrap>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
           {user ? user.email : ''}
           </Typography>
         </Box>
 
-        <Divider sx={{ my: 1 }} />
+        <Divider sx={{ bgcolor: 'common.white', my: 1 }} />
 
         {MENU_OPTIONS.map((option) => (
           <MenuItem
@@ -99,7 +99,7 @@ export const AccountPopover = ({
             to={option.linkTo}
             component={RouterLink}
             onClick={handleClose}
-            sx={{ color: 'text.dark', typography: 'body2', py: 1, px: 2.5 }}
+            sx={{ color: 'common.white', typography: 'body2', py: 1, px: 2.5 }}
           >
             <Box
               component={Icon}
