@@ -37,12 +37,12 @@ function BarcodeWebcam(props) {
                     setResult("Item Not in Database.");
                   }
                 }
-                console.log(props.auth)
                 if(props.auth) {
                   console.log(props.auth.email);
                   axios.post('/api/users/insert', {params: { email: props.auth.email,
                                                             result: result,
-                                                            name: res.data.code } });
+                                                            name: res.data.code,
+                                                            hasPlastics: res.data.hasPlastics } });
                 }
             })
             console.log(result.text);

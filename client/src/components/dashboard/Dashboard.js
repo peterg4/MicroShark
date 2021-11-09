@@ -16,6 +16,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CancelIcon from '@mui/icons-material/Cancel';
+import HelpIcon from '@mui/icons-material/Help';
 
 const plastics = [
   {
@@ -32,11 +35,17 @@ const toDate = (time) => {
   let dateTime = new Date(time)
   return dateTime.toISOString();
 }
+const genIcon = (val) => {
+  if(val == "0") return <CheckBoxIcon/>
+  if(val == "1") return <CancelIcon />
+  if(val == "2") return <HelpIcon /> 
+}
 
 const Demo = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
-  color: theme.palette.common.white
+  color: theme.palette.common.white,
+  width: '100%'
 }));
 
 const Dashboard = ({
@@ -159,16 +168,17 @@ const Dashboard = ({
           </FormikProvider>
         </Grid>
           
-        <Grid item spacing={3} item xs={12} md={6} lg={6} style={{ height: "100%" }}>
+        <Grid item container spacing={3} item xs={6} md={6} lg={6} style={{ height: "100%" }}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
               Scan History
             </Typography>
             <Demo>
               <List>
                 {user.history.map((val) => (
-                  <ListItem key={val.text}>
+                  <ListItem key={val.timestamp} secondaryAction={genIcon(val[0])}>
                     <ListItemText primary={`${val.text}`}
-                                  secondary={toDate(val.timestamp)} />
+                                  secondary={toDate(val.timestamp)}
+                                  style={{overflowWrap: 'break-word'}}/>
                   </ListItem>
                 ))}
               </List>

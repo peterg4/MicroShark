@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 
 const User = require('../../models/User');
 
@@ -77,18 +78,19 @@ router.post(
   }
 );
 
+var gproductSchema = new mongoose.Schema({}, {strict: false});
+gProduct = mongoose.model('gproduct', gproductSchema);
 // @route    POST api/users/insert
 // @desc     add scan to user history
 // @access   Public
 router.post('/insert', async (req, res) => {
-  console.log(req.body.params);
   console.log('adding to history');
   try {
+    let obj = {...req.body.params.hasPlastics, ...req.body.params.result};
     const history = await User.updateOne(
       { email: req.body.params.email },
-      { $push: { history: req.body.params.result } } 
+      { $push: { history: obj } } 
     );
-    console.log(history);
     if(history){
       res.status(200).json(history);
     }
