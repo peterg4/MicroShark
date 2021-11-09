@@ -84,7 +84,7 @@ const Dashboard = ({
       prodName: ''
     },
     onSubmit: async e => {
-      console.log(e);
+      if(e.code == '') return;
       axios.post('/api/products', {
         code: e.code,
         hasPlastics: e.hasPlastics,

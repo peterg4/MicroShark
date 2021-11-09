@@ -78,8 +78,6 @@ router.post(
   }
 );
 
-var gproductSchema = new mongoose.Schema({}, {strict: false});
-gProduct = mongoose.model('gproduct', gproductSchema);
 // @route    POST api/users/insert
 // @desc     add scan to user history
 // @access   Public

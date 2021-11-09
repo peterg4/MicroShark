@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -12,8 +12,33 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
 
 function BarcodeWebcam(props) {
-  const [ data, setData ] = React.useState('');
+  const [ data, setData ] = React.useState({});
   const [ results, setResult ] = React.useState('');
+  const [last, setLast ] = React.useState('start');
+  useEffect(() => {
+    if(data.text && data.text != last) {
+    setLast(data.text)
+    console.log(data)
+    axios.get(`/api/products/`, {params: { code: data.text } })
+    .then(res => {
+        if(res.data) {
+          if(res.data.hasPlastics == "0") {
+            setResult("No Plastics Detected!");
+          } else if(res.data.hasPlastics == "1") {
+            setResult("Microplastics Detected!");
+          } else if(res.data.hasPlastics == "2") {
+            setResult("Item Not in Database.");
+          }
+        }
+        if(props.auth) {
+          console.log(props.auth.email);
+          axios.post('/api/users/insert', {params: { email: props.auth.email,
+                                                    result: data,
+                                                    name: res.data.code,
+                                                    hasPlastics: res.data.hasPlastics } });
+        }
+    })}
+  }, [data]);
   return (
     <>
       <BarcodeScannerComponent
@@ -22,34 +47,16 @@ function BarcodeWebcam(props) {
         overflow={'hidden'}
         onUpdate={(err, result) => {
           if (result) {
-            if(result.text == data) return;
+            console.log(data);
+            if(result.text == data.text) return;
+            if(!result.text) return;
             //check if this entry is same as last one -- if diff make the get REQ
-            setData(result.text)
-            axios.get(`/api/products/`, {params: { code: result.text } })
-            .then(res => {
-                console.log(res.data)
-                if(res.data) {
-                  if(res.data.hasPlastics == "0") {
-                    setResult("No Plastics Detected!");
-                  } else if(res.data.hasPlastics == "1") {
-                    setResult("Microplastics Detected!");
-                  } else if(res.data.hasPlastics == "2") {
-                    setResult("Item Not in Database.");
-                  }
-                }
-                if(props.auth) {
-                  console.log(props.auth.email);
-                  axios.post('/api/users/insert', {params: { email: props.auth.email,
-                                                            result: result,
-                                                            name: res.data.code,
-                                                            hasPlastics: res.data.hasPlastics } });
-                }
-            })
-            console.log(result.text);
+            setData(result);
+
           }
         }}
       />
-      <div className="result">{data}</div>
+      <div className="result">{data.text}</div>
       {results == "No Plastics Detected!" &&
         <Box className="result good"> 
           <Typography variant="h4" sx={{ color: 'text.success.main' }}>
