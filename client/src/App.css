@@ -34,23 +34,38 @@ body {
   position: absolute;
   color: #1b9cc6;
   font-size: large;
+  vertical-align: middle;
   left: 50%;
   top: 50%;
 }
 .good {
   top: 30%;
+  background-color: white;
+  border-radius: 25px;
+  align-items: center;
+  padding: 10px;
   color: #1b9cc6;
   font-size: 40px;
 }
 .bad{
   top: 30%;
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
   color: #FF4842;
   font-size: 40px;
 }
 .unknown{
   top: 30%;
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
   color: #FFC107;
   font-size: 40px;
+}
+.resIcon {
+  vertical-align: middle;
+  font-size: 45px;
 }
 a {
   color: var(--primary-color);

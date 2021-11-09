@@ -76,4 +76,13 @@ router.post(
     }
   }
 );
+
+// @route    POST api/users/insert
+// @desc     add scan to user history
+// @access   Public
+router.post('/insert', async (req, res) => {
+  console.log(req.body.params);
+  console.log('adding to history');
+})
+
 module.exports = router;

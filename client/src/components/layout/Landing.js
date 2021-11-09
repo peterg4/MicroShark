@@ -13,7 +13,7 @@ import HelpIcon from '@mui/icons-material/Help';
 //react-webcam-barcode-scanner
 //css-1byr0tz
 
-function BarcodeWebcam() {
+function BarcodeWebcam(props) {
   const [ data, setData ] = React.useState('');
   const [ result, setResult ] = React.useState('');
   return (
@@ -30,15 +30,20 @@ function BarcodeWebcam() {
                 console.log(res.data)
                 if(res.data) {
                   if(res.data.hasPlastics == "0") {
-                    console.log("nonefound")
                     setResult("No Plastics Detected!");
                   } else if(res.data.hasPlastics == "1") {
-                    console.log("somefound")
                     setResult("Microplastics Detected!");
                   } else if(res.data.hasPlastics == "2") {
-                    console.log("unkownfound")
                     setResult("Item Not in Database.");
                   }
+                }
+                console.log(props.auth)
+                if(props.auth) {
+                  console.log(props.auth.email);
+                  //send insert command to backend
+                  axios.post('/api/users/insert', {params: { email: props.auth.email,
+                                                            result: result,
+                                                            name: res.data.code } });
                 }
             })
             console.log(result.text);
@@ -48,35 +53,36 @@ function BarcodeWebcam() {
       <div className="result">{data}</div>
       {result == "No Plastics Detected!" &&
         <Box className="result good"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CheckBoxIcon /> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CheckBoxIcon className="resIcon" /> {result}</Typography>
         </Box>
       }
       {result == "Microplastics Detected!" &&
         <Box className="result bad"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CancelIcon /> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CancelIcon className="resIcon"/> {result}</Typography>
         </Box>
       }
       {result == "Item Not in Database." &&
         <Box className="result unknown"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><HelpIcon /> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}><HelpIcon className="resIcon"/> {result}</Typography>
         </Box>
       }
     </>
   )
 }
 
-const Landing = ({ isAuthenticated }) => {
+const Landing = ({ auth: { user } }) => {
 return (
-    <BarcodeWebcam />
+    <BarcodeWebcam auth={user} />
   );
 };
 
 Landing.propTypes = {
-  isAuthenticated: PropTypes.bool
+  auth: PropTypes.object
+  
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  auth: state.auth
 });
 
 export default connect(mapStateToProps)(Landing);
