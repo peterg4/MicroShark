@@ -23,6 +23,7 @@ function BarcodeWebcam(props) {
         height={'100%'}
         onUpdate={(err, result) => {
           if (result) {
+            if(result.text == data) return;
             //check if this entry is same as last one -- if diff make the get REQ
             setData(result.text)
             axios.get(`/api/products/`, {params: { code: result.text } })
@@ -47,7 +48,7 @@ function BarcodeWebcam(props) {
                 }
             })
             console.log(result.text);
-          } else setData('')
+          }
         }}
       />
       <div className="result">{data}</div>
