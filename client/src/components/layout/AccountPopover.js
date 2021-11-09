@@ -73,7 +73,7 @@ export const AccountPopover = ({
           })
         }}
       >
-        <Avatar sx={{ bgcolor: 'primary.main' }}>{user ? user.firstName[0] : <AccountCircleIcon />}</Avatar>
+        <Avatar sx={{ bgcolor: 'primary.main', color: 'common.white' }}>{user ? user.firstName[0] : <AccountCircleIcon />}</Avatar>
       </IconButton>
 
       <MenuPopover
@@ -116,7 +116,7 @@ export const AccountPopover = ({
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth variant="outlined" onClick={handleClick}>
+          <Button fullWidth variant="contained" onClick={handleClick}>
              Logout
           </Button>
         </Box>

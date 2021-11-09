@@ -68,9 +68,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={ {position: `absolute`, top: '50%', left: '50%', transform: `translate(-50%, -50%)`} }>
     <FormikProvider value={formik}>
-      <Box sx={{ mt: '40%', mb: 3 }}>
+      <Box sx={{ mt: '0px', mb: 3 }}>
         <Typography variant="h3" sx={{ color: 'text.dark' }}>Sign Up</Typography>
         <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
           <i className='fas fa-user' /> Sign Into Your Account

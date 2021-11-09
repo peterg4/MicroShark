@@ -82,7 +82,6 @@ router.post(
 // @access   Public
 router.post('/insert', async (req, res) => {
   console.log(req.body.params);
-  //before insertion check timestamp is not within 1 minutes of any other with same name
   console.log('adding to history');
   try {
     const history = await User.updateOne(

@@ -10,12 +10,10 @@ import axios from 'axios';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
-//react-webcam-barcode-scanner
-//css-1byr0tz
 
 function BarcodeWebcam(props) {
   const [ data, setData ] = React.useState('');
-  const [ result, setResult ] = React.useState('');
+  const [ results, setResult ] = React.useState('');
   return (
     <>
       <BarcodeScannerComponent
@@ -41,7 +39,6 @@ function BarcodeWebcam(props) {
                 console.log(props.auth)
                 if(props.auth) {
                   console.log(props.auth.email);
-                  //send insert command to backend
                   axios.post('/api/users/insert', {params: { email: props.auth.email,
                                                             result: result,
                                                             name: res.data.code } });
@@ -52,19 +49,25 @@ function BarcodeWebcam(props) {
         }}
       />
       <div className="result">{data}</div>
-      {result == "No Plastics Detected!" &&
+      {results == "No Plastics Detected!" &&
         <Box className="result good"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CheckBoxIcon className="resIcon" /> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <CheckBoxIcon className="resIcon" /> {results}
+          </Typography>
         </Box>
       }
-      {result == "Microplastics Detected!" &&
+      {results == "Microplastics Detected!" &&
         <Box className="result bad"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><CancelIcon className="resIcon"/> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <CancelIcon className="resIcon"/> {results}
+          </Typography>
         </Box>
       }
-      {result == "Item Not in Database." &&
+      {results == "Item Not in Database." &&
         <Box className="result unknown"> 
-          <Typography variant="h4" sx={{ color: 'text.success.main' }}><HelpIcon className="resIcon"/> {result}</Typography>
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <HelpIcon className="resIcon"/> {results}
+          </Typography>
         </Box>
       }
     </>
