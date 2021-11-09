@@ -6,10 +6,16 @@ import { getCurrentProfile } from '../../actions/profile';
 import { Typography, Button, Box, Grid, Container, Stack, TextField, MenuItem  } from '@mui/material';
 import axios from 'axios';
 import Page from '../layout/Page';
+import { styled } from '@mui/material/styles';
 import { useFormik, Form, FormikProvider } from 'formik';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import HistoryIcon from '@mui/icons-material/History';
 import { LoadingButton } from '@mui/lab';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 const plastics = [
   {
@@ -22,6 +28,17 @@ const plastics = [
   }
 ]
 
+const toDate = (time) => {
+  let dateTime = new Date(time)
+  return dateTime.toISOString();
+}
+
+const Demo = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  borderRadius: theme.shape.borderRadius,
+  color: theme.palette.common.white
+}));
+
 const Dashboard = ({
   getCurrentProfile,
   auth: { user },
@@ -30,6 +47,7 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+  console.log(user)
   const [persons, setPersons] = useState({});
   function changeState(data) {
     axios.get(`/api/products`)
@@ -142,15 +160,19 @@ const Dashboard = ({
         </Grid>
           
         <Grid item spacing={3} item xs={12} md={6} lg={6} style={{ height: "100%" }}>
-          <FormikProvider value={formik}>
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="h3" sx={{ color: 'text.dark' }}>Scan History</Typography>
-              <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
-                <HistoryIcon style={{verticalAlign: "middle"}}/> Your Scan History!
-              </Typography>
-              {JSON.stringify(profile.history)}
-            </Box>
-          </FormikProvider>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              Scan History
+            </Typography>
+            <Demo>
+              <List>
+                {user.history.map((val) => (
+                  <ListItem key={val.text}>
+                    <ListItemText primary={`${val.text}`}
+                                  secondary={toDate(val.timestamp)} />
+                  </ListItem>
+                ))}
+              </List>
+            </Demo>
         </Grid>
 
         <Grid item xs={12} md={6} lg={2} style={{ height: "100%" }}>

@@ -19,6 +19,7 @@ function BarcodeWebcam(props) {
       <BarcodeScannerComponent
         width={'100%'}
         height={'100%'}
+        overflow={'hidden'}
         onUpdate={(err, result) => {
           if (result) {
             if(result.text == data) return;
@@ -76,7 +77,7 @@ function BarcodeWebcam(props) {
 
 const Landing = ({ auth: { user } }) => {
 return (
-    <BarcodeWebcam auth={user} />
+    <BarcodeWebcam auth={user} style={{overflow: 'hidden'}}/>
   );
 };
 
