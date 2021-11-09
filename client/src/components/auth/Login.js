@@ -61,9 +61,9 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={ {position: `absolute`, top: '50%', left: '50%', transform: `translate(-50%, -50%)`} }>
     <FormikProvider value={formik}>
-      <Box sx={{ mt: '40%', mb: 3 }}>
+      <Box sx={{ mb: 3 }}>
       <Typography variant="h3" sx={{ color: 'text.dark' }}>Sign In</Typography>
       <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
         <i className='fas fa-user' /> Sign Into Your Account

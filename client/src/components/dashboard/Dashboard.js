@@ -30,7 +30,6 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
-
   const [persons, setPersons] = useState({});
   function changeState(data) {
     axios.get(`/api/products`)
@@ -86,7 +85,7 @@ const Dashboard = ({
             <Box sx={{ mb: 3 }}>
               <Typography variant="h3" sx={{ color: 'text.dark' }}>Enter Product</Typography>
               <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
-                <AddTaskIcon /> Add a Product to the Database!
+                <AddTaskIcon style={{verticalAlign: "middle"}}/> Add a Product to the Database!
               </Typography>
             </Box>
             <Form onSubmit={e => handleSubmit(e)}>
@@ -147,8 +146,9 @@ const Dashboard = ({
             <Box sx={{ mb: 3 }}>
               <Typography variant="h3" sx={{ color: 'text.dark' }}>Scan History</Typography>
               <Typography variant="subtitle" sx={{ color: 'text.disabled'}}>
-                <HistoryIcon /> View Your Scan History!
+                <HistoryIcon style={{verticalAlign: "middle"}}/> Your Scan History!
               </Typography>
+              {JSON.stringify(profile.history)}
             </Box>
           </FormikProvider>
         </Grid>
