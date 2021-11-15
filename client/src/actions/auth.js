@@ -84,6 +84,7 @@ export const login = (email, password) => async dispatch => {
 
     dispatch(loadUser());
   } catch (err) {
+    if(!err.response) return;
     const errors = err.response.data.errors;
 
     if (errors) {

@@ -35,8 +35,9 @@ body {
   color: #1b9cc6;
   font-size: large;
   vertical-align: middle;
-  left: 50%;
+  left: 54%;
   top: 50%;
+  transform: translate(-50%,-50%);
 }
 .good {
   top: 30%;
