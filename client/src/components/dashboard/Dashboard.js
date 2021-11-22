@@ -95,7 +95,7 @@ const Dashboard = ({
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
-  return loading && profile === null ? (
+  return profile === null ? (
     <Spinner />
   ) : (
     <Page title="Administration Dashboard">
@@ -174,7 +174,7 @@ const Dashboard = ({
             </Typography>
             <Demo>
               <List>
-                {user.history.map((val) => (
+                {profile.history.map((val) => (
                   <ListItem key={val.timestamp} secondaryAction={genIcon(val[0])}>
                     <ListItemText primary={`${val.text}`}
                                   secondary={toDate(val.timestamp)}
