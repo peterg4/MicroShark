@@ -20,6 +20,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
 
+
 const plastics = [
   {
     value: '1',
@@ -30,6 +31,24 @@ const plastics = [
     label: 'No'
   }
 ]
+
+const exportData = (data) => {
+  let csvData = [["Plastic","Name","Timestamp"]];
+  data.forEach((val) => {
+    csvData.push([val[0], val.text, val.timestamp])
+  });
+  console.log(csvData);
+  let csvContent = "data:text/csv;charset=utf-8," 
+    + csvData.map(e => e.join(",")).join("\n");
+  var encodedUri = encodeURI(csvContent);
+  console.log(encodedUri)
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "my_data.csv");
+  document.body.appendChild(link); // Required for FF
+
+  link.click();
+}
 
 const toDate = (time) => {
   let dateTime = new Date(time)
@@ -56,7 +75,6 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
-  console.log(user)
   const [persons, setPersons] = useState({});
   function changeState(data) {
     axios.get(`/api/products`)
@@ -170,7 +188,7 @@ const Dashboard = ({
           
         <Grid item container spacing={3} item xs={6} md={6} lg={6} style={{ height: "100%" }}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-              Scan History
+              Scan History <Button onClick={() => {exportData(profile.history)}}>Export</Button>
             </Typography>
             <Demo>
               <List>
