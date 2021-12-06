@@ -157,7 +157,7 @@ const Dashboard = ({
                     error={Boolean(touched.lastName && errors.lastName)}
                     helperText={touched.lastName && errors.lastName}
                   > {plastics.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
+                    <MenuItem sx={{ color: 'white' }} key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
                   ))}</TextField>
