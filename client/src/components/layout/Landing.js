@@ -86,14 +86,63 @@ function BarcodeWebcam(props) {
 const Landing = ({ auth: { user } }) => {
   const [camera, setCamera] = useState(true);
   const [result, setResult] = useState(null);
+  const [last, setLast ] = React.useState('start');
+  const [output, setOutput ] = React.useState('start');
+  
 
   const onDetected = result => {
     setResult(result);
     console.log(result);
   };
+  useEffect(() => {
+    if(result && result != last) {
+    setLast(result)
+    console.log(result)
+    axios.get(`/api/products/`, {params: { code: result } })
+    .then(res => {
+        if(res.data) {
+          if(res.data.hasPlastics == "0") {
+            setOutput("No Plastics Detected!");
+          } else if(res.data.hasPlastics == "1") {
+            setOutput("Microplastics Detected!");
+          } else if(res.data.hasPlastics == "2") {
+            setOutput("Item Not in Database.");
+          }
+        }
+        if(user) {
+          console.log(user.email);
+          axios.post('/api/users/insert', {params: { email: user.email,
+                                                    result: output,
+                                                    name: res.data.code,
+                                                    hasPlastics: res.data.hasPlastics } });
+        }
+    })}
+  }, [result]);
 return (
     <Container>
     {camera && <Scanner onDetected={onDetected} />}
+    <div className="result">{result}</div>
+      {output == "No Plastics Detected!" &&
+        <Box className="result good"> 
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <CheckBoxIcon className="resIcon" /> {output}
+          </Typography>
+        </Box>
+      }
+      {output == "Microplastics Detected!" &&
+        <Box className="result bad"> 
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <CancelIcon className="resIcon"/> {output}
+          </Typography>
+        </Box>
+      }
+      {output == "Item Not in Database." &&
+        <Box className="result unknown"> 
+          <Typography variant="h4" sx={{ color: 'text.success.main' }}>
+            <HelpIcon className="resIcon"/> {output}
+          </Typography>
+        </Box>
+      }
     </Container>
   );
 };
