@@ -30,7 +30,6 @@ if (localStorage.token) {
 const RootStyle = styled('div')({
   display: 'flex',
   minHeight: '100%',
-  overflow: 'hidden',
   height: '100vh'
 });
 
@@ -38,7 +37,6 @@ const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 const MainStyle = styled('div')(({ theme }) => ({
   flexGrow: 1,
-  overflow: 'hidden',
   height: 'fit-content'
 }));
 
