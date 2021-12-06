@@ -84,7 +84,9 @@ router.post(
 router.post('/insert', async (req, res) => {
   console.log('adding to history');
   try {
-    let obj = {...req.body.params.hasPlastics, ...req.body.params.result};
+    let time = Date.now();
+    let obj = {"0": req.body.params.hasPlastics, text: req.body.params.result, name: req.body.params.name, timestamp: time};
+    console.log(obj);
     const history = await User.updateOne(
       { email: req.body.params.email },
       { $push: { history: obj } } 
