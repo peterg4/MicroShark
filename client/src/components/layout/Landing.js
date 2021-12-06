@@ -112,8 +112,8 @@ const Landing = ({ auth: { user } }) => {
         if(user) {
           console.log(user.email);
           axios.post('/api/users/insert', {params: { email: user.email,
-                                                    result: output,
-                                                    name: res.data.code,
+                                                    result: result,
+                                                    name: res.data.prodName,
                                                     hasPlastics: res.data.hasPlastics } });
         }
     })}
