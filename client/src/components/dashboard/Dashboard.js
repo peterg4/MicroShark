@@ -19,7 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
-
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Tooltip from '@mui/material/Tooltip';
 
 const plastics = [
   {
@@ -55,11 +56,15 @@ const toDate = (time) => {
   return dateTime.toISOString();
 }
 const genIcon = (val) => {
-  if(val == "0") return <CheckBoxIcon/>
-  if(val == "1") return <CancelIcon />
-  if(val == "2") return <HelpIcon /> 
+  if(val == "0") return <CheckBoxIcon sx={{verticalAlign: 'baseline'}}/>
+  if(val == "1") return <CancelIcon sx={{verticalAlign: 'baseline'}}/>
+  if(val == "2") return <HelpIcon sx={{verticalAlign: 'baseline'}}/> 
 }
-
+const genTool = (val) => {
+  if(val == "0") return "No Microplastics"
+  if(val == "1") return "Microplastics Detected"
+  if(val == "2") return "Uknown Item" 
+}
 const Demo = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
@@ -193,10 +198,18 @@ const Dashboard = ({
             <Demo>
               <List>
                 {profile.history.map((val) => (
-                  <ListItem key={val.timestamp} secondaryAction={genIcon(val[0])}>
-                    <ListItemText primary={`${val.text}`}
+                  <ListItem key={val.timestamp} >
+                    <ListItemSecondaryAction>
+                      <Tooltip title={genTool(val[0])} arrow placement="top">
+                        <span>{genIcon(val[0])}</span>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                    {val.name ? <ListItemText primary={`${val.name}`}
                                   secondary={toDate(val.timestamp)}
                                   style={{overflowWrap: 'break-word'}}/>
+                              : <ListItemText primary={`${val.text}`}
+                                secondary={toDate(val.timestamp)}
+                                style={{overflowWrap: 'break-word'}}/>}
                   </ListItem>
                 ))}
               </List>
