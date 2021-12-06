@@ -15,6 +15,7 @@
     "formik": "^2.2.9",
     "helmet": "^4.6.0",
     "moment": "^2.24.0",
+    "quagga": "^0.12.1",
     "react": "^16.8.6",
     "react-barcode-reader": "0.0.2",
     "react-csv": "^2.0.3",

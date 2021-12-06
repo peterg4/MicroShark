@@ -10,6 +10,7 @@ import axios from 'axios';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpIcon from '@mui/icons-material/Help';
+import Scanner from "./Scanner";
 
 function BarcodeWebcam(props) {
   const [ data, setData ] = React.useState({});
@@ -81,10 +82,19 @@ function BarcodeWebcam(props) {
     </>
   )
 }
-
+///*<BarcodeWebcam auth={user} style={{overflow: 'hidden'}}/>*/}
 const Landing = ({ auth: { user } }) => {
+  const [camera, setCamera] = useState(true);
+  const [result, setResult] = useState(null);
+
+  const onDetected = result => {
+    setResult(result);
+    console.log(result);
+  };
 return (
-    <BarcodeWebcam auth={user} style={{overflow: 'hidden'}}/>
+    <Container>
+    {camera && <Scanner onDetected={onDetected} />}
+    </Container>
   );
 };
 
